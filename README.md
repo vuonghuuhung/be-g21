@@ -49,8 +49,8 @@ And then access to `http://localhost:{WEB_PORT}`
 
 ### New feature development
 
-- Create a new branch from `develop` with name prefix `feature/{feature_description}`
-- Create a pull request to `develop` branch
+- Create a new branch from `main` with name prefix `feature/{feature_description}`
+- Create a pull request to `main` branch
 - Assign a PR to reviewer
 
 ### Bugs
