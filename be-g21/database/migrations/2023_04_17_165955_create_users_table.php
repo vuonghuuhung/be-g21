@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('address_node');
             $table->string('phone');
             $table->string('token');
-            $table->unsignedBigInteger('status')->default(2)->comment('1-active, 2-inactive, 3-removed');;
+            $table->unsignedBigInteger('status')->default(2)->comment('1-active, 2-inactive, 3-removed');
             $table->timestamps();
         });
 
