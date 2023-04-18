@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('style_name', 100);
-            $table->string('image', 100);
+            $table->string('image', 100)->nullable();;
             $table->string('standard_price', 30);
             $table->string('fixed_price', 30);
             $table->integer('stock');
