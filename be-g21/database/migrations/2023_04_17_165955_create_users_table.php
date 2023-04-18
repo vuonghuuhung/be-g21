@@ -27,9 +27,9 @@ return new class extends Migration
             $table->unsignedBigInteger('city_id');
             $table->unsignedBigInteger('district_id');
             $table->unsignedBigInteger('urban_id');
-            $table->string('address_node');
+            $table->string('address_node')->nullable();;
             $table->string('phone');
-            $table->string('token');
+            $table->string('token')->nullable();;
             $table->unsignedBigInteger('status')->default(2)->comment('1-active, 2-inactive, 3-removed');
             $table->timestamps();
         });

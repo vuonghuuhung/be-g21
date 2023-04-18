@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('product_name', 100);
             $table->string('description', 500);
             $table->unsignedBigInteger('category_id');
-            $table->string('image', 100);
-            $table->integer('amount');
+            $table->string('image', 100)->nullable();;
             $table->integer('option_type')->default(1)->comment('1-color, 2-style');
             $table->unsignedBigInteger('relate_to_product')->nullable();
             $table->timestamps();

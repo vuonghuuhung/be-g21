@@ -17,11 +17,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $randPassword = 'Admin@123';
+        $randPassword = 'User@123';
 
         foreach (range(1, 15) as $id) {
             users::create([
-                "email" => 'admin' . $id . '@gmail.com',
+                "email" => 'user' . $id . '@gmail.com',
                 "firstname" => 'Fname' . $id,
                 "lastname" => 'Lname' . $id,
                 "password" => Hash::make($randPassword),
@@ -29,8 +29,10 @@ class UserSeeder extends Seeder
                 "city_id" => 1,
                 "district_id" => 1,
                 "urban_id" => 1,
-                "address_node" => 'Ngõ 1',
+                "address_node" => 'Ngõ ' . $id,
                 "phone" => "0123456789",
+                "status" => rand(1, 3),
+                "role" => rand(1, 2)
             ]);
         }
     }
