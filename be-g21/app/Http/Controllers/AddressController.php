@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\District;
 use App\Models\Urban;
-use Illuminate\Http\Request;
 
 class AddressController extends BaseController
 {
