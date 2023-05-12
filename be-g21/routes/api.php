@@ -28,8 +28,12 @@ Route::controller(AddressController::class)->group(function () {
     Route::get('get_urbans_by_id_district/{idDistrict}', 'getUrbans');
 });
 
+Route::controller(ProductController::class)->group(function () {
+    Route::get('products', 'index');
+});
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(ProductController::class)->group(function () {
-        Route::get('products', 'index');
+        Route::get('/auth/products', 'index');
     });
 });
