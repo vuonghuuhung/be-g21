@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\products;
+use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
     public function run()
     {
         foreach (range(1, 45) as $id) {
-            products::create([
+            Product::create([
                 "product_name" => 'Product name' . $id,
                 "description" => 'Mỗi người đều có 96 khối năng lượng mỗi ngày để làm những gì chúng ta muốn. Bạn luôn cần đảm bảo mình đang sử dụng mỗi khối năng lượng một cách khôn ngoan để đạt được tiến bộ nhanh nhất trên các mục tiêu quan trọng của bản thân.',
                 "category_id" => rand(1, 15),
