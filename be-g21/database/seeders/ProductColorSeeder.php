@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\productColors;
+use App\Models\ProductColor;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,7 +17,7 @@ class ProductColorSeeder extends Seeder
     {
         foreach (range(1, 45) as $id) {
             $price = rand(1000, 9000);
-            productColors::create([
+            ProductColor::create([
                 "product_id" => rand(1, 45),
                 "color_name" => 'Color Name' . $id,
                 "code" => '#' . $this->random_color_part() . $this->random_color_part() . $this->random_color_part(),

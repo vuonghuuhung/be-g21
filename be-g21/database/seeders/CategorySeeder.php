@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\categories;
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +16,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         foreach (range(1, 15) as $id) {
-            categories::create([
+            Category::create([
                 "category_name" => 'Category name' . $id,
                 "description" => 'Thành công là học cách làm việc THÔNG MINH hơn chứ không phải CHĂM CHỈ hơn! Những người thành công thường chỉ tập trung thời gian của họ vào một vài ưu tiên và luôn nghĩ làm thế nào để mọi việc diễn ra suôn sẻ.',
             ]);

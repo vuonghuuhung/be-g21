@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\users;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         $randPassword = 'User@123';
 
         foreach (range(1, 15) as $id) {
-            users::create([
+            User::create([
                 "email" => 'user' . $id . '@gmail.com',
                 "firstname" => 'Fname' . $id,
                 "lastname" => 'Lname' . $id,

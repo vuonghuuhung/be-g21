@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\orders;
+use App\Models\Order;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +16,7 @@ class OrderSeeder extends Seeder
     public function run()
     {
         foreach (range(1, 3) as $id) {
-            orders::create([
+            Order::create([
                 "user_id" => rand(1, 15),
                 "address" => 'Name' . $id . ', SĐT: ' . $this->radomPhone() . ', ' . 'Số nhà' . $id . ', ' . $this->radomAddr(),
                 "total_price" => 233.7,
@@ -24,7 +24,7 @@ class OrderSeeder extends Seeder
             ]);
         }
         foreach (range(4, 7) as $id) {
-            orders::create([
+            Order::create([
                 "user_id" => rand(1, 15),
                 "address" => 'Name' . $id . ', SĐT: ' . $this->radomPhone() . ', ' . 'Số nhà' . $id . ', ' . $this->radomAddr(),
                 "total_price" => 293.7,
@@ -32,7 +32,7 @@ class OrderSeeder extends Seeder
             ]);
         }
         foreach (range(8, 9) as $id) {
-            orders::create([
+            Order::create([
                 "user_id" => rand(1, 15),
                 "address" => 'Name' . $id . ', SĐT: ' . $this->radomPhone() . ', ' . 'Số nhà' . $id . ', ' . $this->radomAddr(),
                 "total_price" => 233.7,
@@ -40,7 +40,7 @@ class OrderSeeder extends Seeder
             ]);
         }
         foreach (range(10, 15) as $id) {
-            orders::create([
+            Order::create([
                 "user_id" => rand(1, 15),
                 "address" => 'Name' . $id . ', SĐT: ' . $this->radomPhone() . ', ' . 'Số nhà' . $id . ', ' . $this->radomAddr(),
                 "total_price" => 123.7,
