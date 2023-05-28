@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\orderDetails;
+use App\Models\OrderDetail;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +16,7 @@ class OrderDetailSeeder extends Seeder
     public function run()
     {
         foreach (range(1, 15) as $id) {
-            orderDetails::create([
+            OrderDetail::create([
                 "product_id" => $id,
                 "order_id" => rand(1, 15),
                 "total_price" => 123.7,
@@ -25,7 +25,7 @@ class OrderDetailSeeder extends Seeder
             ]);
         }
         foreach (range(1, 9) as $id) {
-            orderDetails::create([
+            OrderDetail::create([
                 "product_id" => $id,
                 "order_id" => rand(1, 15),
                 "total_price" => 110,
@@ -34,7 +34,7 @@ class OrderDetailSeeder extends Seeder
             ]);
         }
         foreach (range(4, 7) as $id) {
-            orderDetails::create([
+            OrderDetail::create([
                 "product_id" => $id,
                 "order_id" => rand(1, 15),
                 "total_price" => 60,

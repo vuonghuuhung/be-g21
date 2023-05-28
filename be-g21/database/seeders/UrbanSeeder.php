@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\urbans;
+use App\Models\Urban;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +19,7 @@ class UrbanSeeder extends Seeder
         $data = json_decode($jsonData, true);
 
         foreach ($data as $item) {
-            urbans::create([
+            Urban::create([
                 'id' => $item['code'],
                 'name' => $item['name'],
                 'slug' => $item['slug'],

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\districts;
+use App\Models\District;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +19,7 @@ class DistrictSeeder extends Seeder
         $data = json_decode($jsonData, true);
 
         foreach ($data as $item) {
-            districts::create([
+            District::create([
                 'id' => $item['code'],
                 'name' => $item['name'],
                 'slug' => $item['slug'],

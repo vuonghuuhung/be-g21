@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  version: 1.0.11
+servers:
+  - url: http://127.0.0.1:8000/api
+tags:
+  - name: auth
+    description: Everything about your Auth
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /login:
+    post:
+      tags:
+        - auth
+      summary: Logs user integero the system
+      description: ""
+      operationId: Login
+      parameters:
+        - name: email
+          in: query
+          description: The user name for login
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Login"
+        "404":
+          description: Invalid username/password supplied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginF"
+components:
+  schemas:
+    Login:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        data:
+          type: object
+          properties:
+            token:
+              type: string
+              example: "6|m8jeWR1fbR9YwS9cHADAzRp0S5M8nVR68o5DrBeV"
+            user_info:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 1
+                email:
+                  type: string
+                  example: "user1@gmail.com"
+                firstname:
+                  type: string
+                  example: "Fname1"
+                lastname:
+                  type: string
+                  example: "Lname1"
+                role:
+                  type: integer
+                  example: 1
+                city_id:
+                  type: integer
+                  example: 1
+                district_id:
+                  type: integer
+                  example: 1
+                urban_id:
+                  type: integer
+                  example: 1
+                address_node:
+                  type: string
+                  example: "ngõ 1"
+                phone:
+                  type: integer
+                  example: "0123456789"
+                status:
+                  type: integer
+                  example: 1
+                created_at:
+                  type: string
+                  example: "2023-05-12T02:23:58.000000Z"
+                updated_at:
+                  type: string
+                  example: "2023-05-12T02:23:58.000000Z"
+            message:
+              type: string
+              example: "User login successfully."
+    LoginF:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Unauthorised."
+        data:
+          type: object
+          properties:
+            error:
+              type: string
+              example: "Unauthorised"
+    

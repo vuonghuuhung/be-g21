@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\productStyles;
+use App\Models\ProductStyle;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,7 +17,7 @@ class ProductStyleSeeder extends Seeder
     {
         foreach (range(1, 45) as $id) {
             $price = rand(1000, 9000);
-            productStyles::create([
+            ProductStyle::create([
                 "product_id" => rand(1, 45),
                 "style_name" => 'Color Style' . $id,
                 "image" => "https://cdn.pixabay.com/photo/2016/11/29/07/22/bible-1868070__340.jpg",

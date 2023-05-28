@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\cities;
+use App\Models\City;
 use Illuminate\Database\Seeder;
 
 class CitySeeder extends Seeder
@@ -18,7 +18,7 @@ class CitySeeder extends Seeder
         $data = json_decode($jsonData, true);
 
         foreach ($data as $item) {
-            cities::create([
+            City::create([
                 'id' => $item['code'],
                 'name' => $item['name'],
                 'slug' => $item['slug'],
