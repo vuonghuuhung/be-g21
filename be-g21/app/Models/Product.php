@@ -12,4 +12,14 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category');
     }
+
+    public function colors()
+    {
+        return $this->hasMany('App\Models\ProductColor');
+    }
+
+    public function styles()
+    {
+        return $this->hasMany('App\Models\ProductStyle');
+    }
 }
