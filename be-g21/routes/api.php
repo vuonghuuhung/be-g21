@@ -30,10 +30,14 @@ Route::controller(AddressController::class)->group(function () {
 
 Route::controller(ProductController::class)->group(function () {
     Route::get('products', 'index');
+    Route::get('product/{id}', 'getProductById');
+    Route::get('product/update/{id}', 'updateProduct');
+    Route::get('categories', 'getAllCategory');
+    Route::post('products_by_cate_id', 'getProductByCategoryId');
 });
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(ProductController::class)->group(function () {
-        Route::get('/auth/products', 'index');
+        Route::get('/admin/products', 'index');
     });
 });
