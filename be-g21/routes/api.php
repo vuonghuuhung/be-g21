@@ -31,13 +31,14 @@ Route::controller(AddressController::class)->group(function () {
 Route::controller(ProductController::class)->group(function () {
     Route::get('products', 'index');
     Route::get('product/{id}', 'getProductById');
-    Route::get('product/update/{id}', 'updateProduct');
-    Route::get('categories', 'getAllCategory');
     Route::post('products_by_cate_id', 'getProductByCategoryId');
+    Route::post('/upload_image', 'uploadImage');
+    Route::get('/categories', 'getAllCategory');
 });
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/admin/products', 'index');
+        Route::post('/admin/product/update/{id}', 'updateProduct');
     });
 });
