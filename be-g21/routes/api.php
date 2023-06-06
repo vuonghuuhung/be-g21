@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Http\Request;
@@ -34,11 +35,23 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('products_by_cate_id', 'getProductByCategoryId');
     Route::post('/upload_image', 'uploadImage');
     Route::get('/categories', 'getAllCategory');
+    Route::get('/style/{id}', 'getStyleById');
+    Route::get('/color/{id}', 'getColorById');
 });
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/admin/products', 'index');
         Route::post('/admin/product/update/{id}', 'updateProduct');
+        Route::post('/admin/category/create', 'createCategory');
+        Route::post('/admin/product/create', 'createProduct');
+        Route::post('/admin/style/update/{id}', 'updateStyle');
+        Route::post('/admin/color/update/{id}', 'updateColor');
+        Route::post('/admin/color/create', 'createColor');
+        Route::post('/admin/style/create', 'createStyle');
+    });
+    Route::controller(OrderController::class)->group(function () {
+        Route::post('/admin/order/create', 'createOrder');
+        Route::post('/admin/order_detail/create', 'createOrderDetail');
     });
 });

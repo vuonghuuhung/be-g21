@@ -42,7 +42,7 @@ class ProductController extends BaseController
     public function getProductById($id)
     {
         $product = Product::where('id', $id)->get()->first();
-        $product->type = $product->option_type == 1 ? ProductColor::where("product_id", $id)->get() : ProductStyle::where("product_id", $id)->get();
+        $product->type = $product->option_type == 1 ? ProductColor::where("product_id", $id)->where('status', '=', 1)->get() : ProductStyle::where("product_id", $id)->where('status', '=', 1)->get();
         return $this->sendResponse($product, 'Product retrieved successfully.');
     }
 
@@ -67,6 +67,84 @@ class ProductController extends BaseController
             return $this->sendResponse('OK', 'Product update successful.');
         } else {
             return $this->sendResponse('Error', 'Product update failed.');
+        }
+    }
+
+    public function createCategory(Request $request)
+    {
+        $data = $request->all();
+        $category = Category::create($data);
+        if ($category) {
+            return $this->sendResponse('OK', 'Category create successful.');
+        } else {
+            return $this->sendResponse('Error', 'Category create failed.');
+        }
+    }
+
+    public function createProduct(Request $request)
+    {
+        $data = $request->all();
+        $product = Product::create($data);
+        if ($product) {
+            return $this->sendResponse($product->id, 'Category create successful.');
+        } else {
+            return $this->sendResponse($product->id, 'Category create failed.');
+        }
+    }
+
+    public function getStyleById($id)
+    {
+        $style = ProductStyle::where('id', $id)->get()->first();
+        return $this->sendResponse($style, 'Style retrieved successfully.');
+    }
+
+    public function getColorById($id)
+    {
+        $style = ProductColor::where('id', $id)->get()->first();
+        return $this->sendResponse($style, 'Style retrieved successfully.');
+    }
+
+    public function updateStyle($id, Request $request)
+    {
+        $data = $request->all();
+        $product = ProductStyle::where('id', $id)->update($data);
+        if ($product) {
+            return $this->sendResponse('OK', 'Product style update successful.');
+        } else {
+            return $this->sendResponse('Error', 'Product style update failed.');
+        }
+    }
+
+    public function updateColor($id, Request $request)
+    {
+        $data = $request->all();
+        $product = ProductColor::where('id', $id)->update($data);
+        if ($product) {
+            return $this->sendResponse('OK', 'Product color update successful.');
+        } else {
+            return $this->sendResponse('Error', 'Product color update failed.');
+        }
+    }
+
+    public function createStyle(Request $request)
+    {
+        $data = $request->all();
+        $style = ProductStyle::create($data);
+        if ($style) {
+            return $this->sendResponse('OK', 'Style create successful.');
+        } else {
+            return $this->sendResponse('Error', 'Style create failed.');
+        }
+    }
+
+    public function createColor(Request $request)
+    {
+        $data = $request->all();
+        $style = ProductColor::create($data);
+        if ($style) {
+            return $this->sendResponse('OK', 'Color create successful.');
+        } else {
+            return $this->sendResponse('Error', 'Color create failed.');
         }
     }
 }
