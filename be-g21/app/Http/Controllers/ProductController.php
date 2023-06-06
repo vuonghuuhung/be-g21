@@ -4,11 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductColor;
+use App\Models\ProductStyle;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Cloudinary\Cloudinary;
 
 class ProductController extends BaseController
 {
+    public function uploadImage(Request $request)
+    {
+        $cloudinary = new Cloudinary(
+            [
+                'cloud' => [
+                    'cloud_name' => 'dqejrpzru',
+                    'api_key'    => '225848987484184',
+                    'api_secret' => 'BU0OvW75xQ7R-_EHttHjh1dcSV0',
+                ],
+            ]
+        );
+        if ($request->hasFile('image_product')) {
+            $image = $cloudinary->uploadApi()->upload($request->file('image_product')->getRealPath());
+            return $this->sendResponse($image, 'Image retrieved successfully.');
+        }
+    }
+
     public function index(Request $request)
     {
         $page = $request->input('page') ?? 1;
@@ -21,7 +41,8 @@ class ProductController extends BaseController
 
     public function getProductById($id)
     {
-        $product = Product::find($id)->get();
+        $product = Product::where('id', $id)->get()->first();
+        $product->type = $product->option_type == 1 ? ProductColor::where("product_id", $id)->get() : ProductStyle::where("product_id", $id)->get();
         return $this->sendResponse($product, 'Product retrieved successfully.');
     }
 
@@ -38,14 +59,14 @@ class ProductController extends BaseController
         return $this->sendResponse($products, 'Products retrieved successfully.');
     }
 
-    public function updateProduct(Request $request)
+    public function updateProduct($id, Request $request)
     {
-        $data = $request->data;
-        $product = Product::find($request->id)->update($data->toArray());
+        $data = $request->all();
+        $product = Product::where('id', $id)->update($data);
         if ($product) {
-            $this->sendResponse($product, 'Product update successful.');
+            return $this->sendResponse('OK', 'Product update successful.');
         } else {
-            $this->sendResponse('Error', 'Product update failed.');
+            return $this->sendResponse('Error', 'Product update failed.');
         }
     }
 }
