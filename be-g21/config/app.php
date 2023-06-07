@@ -194,7 +194,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
+        JD\Cloudder\CloudderServiceProvider::class,
     ],
 
     /*
@@ -209,6 +210,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Cloudinary' => CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
+        'Cloudder' => JD\Cloudder\Facades\Cloudder::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
