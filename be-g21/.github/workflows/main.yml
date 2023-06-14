@@ -22,6 +22,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
@@ -30,10 +31,9 @@ jobs:
           push: true
           tags: vuonghuuhung/g21-be:staging
 
-      - name: Push to Repository
+      - name: Deploy to InfinityFree
         run: |
-          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag be-g21 ${{ secrets.DOCKER_USERNAME }}/be-g21:staging
-          docker push ${{ secrets.DOCKER_USERNAME }}/be-g21:staging
-          docker tag be-g21 g21-be.great-site.net/be-g21
-          docker push g21-be.great-site.net/be-g21
+          docker login -u ${{ secrets.INFINITYFREE_USERNAME }} -p ${{ secrets.INFINITYFREE_PASSWORD }} 185.27.134.11
+          docker pull vuonghuuhung/g21-be:staging
+          docker tag vuonghuuhung/g21-be:staging 185.27.134.11/g21-be:staging
+          docker push 185.27.134.11/g21-be:staging
