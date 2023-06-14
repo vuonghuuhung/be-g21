@@ -26,13 +26,13 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_aa61053aeea04480a2622e2dd49bf5d9 }}
         password: ${{ secrets.AzureAppService_ContainerPassword_55de2f91d3c2492496fc07954202b03d }}
 
-    # - name: Copy .env.example to .env and update variables
-    #   run: |
-    #     cp .env.example .env
-    #     sed -i "s/DB_HOST=127.0.0.1/DB_HOST=${{ secrets.DB_HOST }}/g" .env
-    #     sed -i "s/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/g" .env
-    #     sed -i "s/DB_USERNAME=root/DB_USERNAME=${{ secrets.DB_USERNAME }}/g" .env
-    #     sed -i "s/DB_PASSWORD=/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/g" .env
+    - name: Copy .env.example to .env and update variables
+      run: |
+        cp .env.example .env
+        sed -i "s/DB_HOST=127.0.0.1/DB_HOST=${{ secrets.DB_HOST }}/g" .env
+        sed -i "s/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/g" .env
+        sed -i "s/DB_USERNAME=root/DB_USERNAME=${{ secrets.DB_USERNAME }}/g" .env
+        sed -i "s/DB_PASSWORD=/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/g" .env
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
@@ -57,3 +57,4 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_a741e975cdc34876bb2c89b93325a435 }}
         images: 'g21be.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_aa61053aeea04480a2622e2dd49bf5d9 }}/g21-be:${{ github.sha }}'
+        port: 80
