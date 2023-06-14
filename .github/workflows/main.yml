@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set working directory
-        run: cd be-g21
-        
+        run: cd ../be-g21
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
