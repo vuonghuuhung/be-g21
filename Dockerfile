@@ -26,8 +26,8 @@ COPY . .
 # Cài đặt các gói Composer
 RUN composer install --no-dev --no-interaction --optimize-autoloader
 
-# Tạo key mới cho ứng dụng Laravel
-RUN php artisan key:generate --force
+# # Tạo key mới cho ứng dụng Laravel
+# RUN php artisan key:generate --force
 
 # Chạy ứng dụng Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
