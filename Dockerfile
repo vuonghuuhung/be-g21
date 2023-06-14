@@ -1,39 +1,33 @@
-# Sử dụng PHP FPM image làm base
+# Sử dụng PHP 8.1 trên base image
 FROM php:8.1-fpm
 
-# Cài đặt các phần mềm cần thiết
+# Cài đặt các gói phụ thuộc
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libzip-dev \
+    curl \
     libonig-dev \
-    libpng-dev \
-    libxml2-dev
-
-# Cài đặt extension PHP
-RUN docker-php-ext-install pdo_mysql zip mbstring exif pcntl bcmath gd
+    libxml2-dev \
+    libzip-dev \
+    zip \
+    unzip \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath opcache zip
 
 # Cài đặt Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-# Thiết lập thư mục làm việc
-WORKDIR /var/www
+# Đặt thư mục làm việc
+WORKDIR /var/www/html
 
-# Copy mã nguồn ứng dụng vào image
-COPY . /var/www
+# Copy mã nguồn Laravel vào container
+COPY . .
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
+# Copy file .env vào container
+COPY .env /var/www/html/.env
 
-# Cài đặt dependencies và build ứng dụng Laravel
-RUN composer install --optimize-autoloader --no-dev
-RUN php artisan config:cache
-RUN php artisan route:cache
+# Cài đặt các gói Composer
+RUN composer install --no-dev --no-interaction --optimize-autoloader
 
-# Thiết lập quyền cho thư mục storage và bootstrap
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+# Tạo key mới cho ứng dụng Laravel
+RUN php artisan key:generate --force
 
-# Mở cổng 9000 để PHP-FPM lắng nghe
-EXPOSE 8000
-
-# Chạy PHP-FPM
-CMD ["php-fpm"]
+# Chạy ứng dụng Laravel
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
