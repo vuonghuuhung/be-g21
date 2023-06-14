@@ -20,8 +20,8 @@ WORKDIR /var/www/html
 # Copy mã nguồn Laravel vào container
 COPY . .
 
-# Copy file .env vào container
-COPY .env /var/www/html/.env
+# # Copy file .env vào container
+# COPY .env /var/www/html/.env
 
 # Cài đặt các gói Composer
 RUN composer install --no-dev --no-interaction --optimize-autoloader
