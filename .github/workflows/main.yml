@@ -13,6 +13,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Set working directory
+        run: cd be-g21
+        
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
@@ -22,8 +25,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set working directory
-        run: cd be-g21
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
