@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          dockerfile: be-g21/Dockerfile
+          dockerfile: ./be-g21/Dockerfile
           push: true
           tags: vuonghuuhung/g21-be:staging
 
