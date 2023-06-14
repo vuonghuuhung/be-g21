@@ -33,7 +33,7 @@ RUN php artisan route:cache
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 # Mở cổng 9000 để PHP-FPM lắng nghe
-EXPOSE 9000
+EXPOSE 8000
 
 # Chạy PHP-FPM
 CMD ["php-fpm"]
