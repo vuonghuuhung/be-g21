@@ -24,7 +24,7 @@ COPY . .
 # COPY .env /var/www/html/.env
 
 # Cài đặt các gói Composer
-RUN composer install --no-dev --no-interaction --optimize-autoloader
+RUN composer install --optimize-autoloader
 
 # # Tạo key mới cho ứng dụng Laravel
 # RUN php artisan key:generate

@@ -57,4 +57,4 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_a741e975cdc34876bb2c89b93325a435 }}
         images: 'g21be.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_aa61053aeea04480a2622e2dd49bf5d9 }}/g21-be:${{ github.sha }}'
-        port: 80
+        port: '80'
