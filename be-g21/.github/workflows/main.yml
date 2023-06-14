@@ -33,7 +33,7 @@ jobs:
 
       - name: Deploy to InfinityFree
         run: |
-          docker login -u ${{ secrets.INFINITYFREE_USERNAME }} -p ${{ secrets.INFINITYFREE_PASSWORD }} ftp://g21-be.great-site.net
+          docker login -u ${{ secrets.INFINITYFREE_USERNAME }} -p ${{ secrets.INFINITYFREE_PASSWORD }} 185.27.134.34
           docker pull vuonghuuhung/g21-be:staging
-          docker tag vuonghuuhung/g21-be:staging g21-be.great-site.net/g21-be:staging
-          docker push g21-be.great-site.net/g21-be:staging
+          docker tag vuonghuuhung/g21-be:staging 185.27.134.34/g21-be:staging
+          docker push 185.27.134.34/g21-be:staging
