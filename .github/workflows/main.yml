@@ -22,6 +22,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set working directory
+        run: cd be-g21
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
