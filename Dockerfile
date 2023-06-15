@@ -31,4 +31,4 @@ RUN composer install --optimize-autoloader
 
 # Chạy ứng dụng Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
-EXPOSE 80
+EXPOSE 9000 80
