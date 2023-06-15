@@ -24,7 +24,10 @@ COPY . .
 # COPY .env /var/www/html/.env
 
 # Cài đặt các gói Composer
-RUN composer install --optimize-autoloader
+RUN composer install --optimize-autoloader --no-dev
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan optimize
 
 # # Tạo key mới cho ứng dụng Laravel
 # RUN php artisan key:generate
