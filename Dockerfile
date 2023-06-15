@@ -36,8 +36,8 @@ RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan optimize
 
-# # Tạo key mới cho ứng dụng Laravel
-# RUN php artisan key:generate
+# Tạo key mới cho ứng dụng Laravel
+RUN php artisan key:generate
 
 # Chạy ứng dụng Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
