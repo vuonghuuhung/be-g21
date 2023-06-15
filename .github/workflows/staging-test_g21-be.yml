@@ -28,14 +28,14 @@ jobs:
 
     - name: Copy .env.example to .env and update variables
       run: |
-        cp .env.example .env
-        sed -i "s/DB_HOST=127.0.0.1/DB_HOST=${{ secrets.DB_HOST }}/g" .env
-        sed -i "s/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/g" .env
-        sed -i "s/DB_USERNAME=root/DB_USERNAME=${{ secrets.DB_USERNAME }}/g" .env
-        sed -i "s/DB_PASSWORD=/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/g" .env
+        cp /var/www/html/.env.example /var/www/html/.env
+        sed -i "s/DB_HOST=127.0.0.1/DB_HOST=${{ secrets.DB_HOST }}/g" /var/www/html/.env
+        sed -i "s/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/g" /var/www/html/.env
+        sed -i "s/DB_USERNAME=root/DB_USERNAME=${{ secrets.DB_USERNAME }}/g" /var/www/html/.env
+        sed -i "s/DB_PASSWORD=/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/g" /var/www/html/.env
 
-    - name: Display .env content
-      run: cat .env
+    - name: Display /var/www/html/.env content
+      run: cat /var/www/html/.env
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
