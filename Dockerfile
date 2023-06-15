@@ -30,5 +30,5 @@ RUN composer install --optimize-autoloader
 # RUN php artisan key:generate
 
 # Chạy ứng dụng Laravel
-CMD ["php", "artisan", "serve", "--host=g21-be.azurewebsites.net", "--port=9000"]
+CMD ["php", "artisan", "serve", "--port=9000"]
 EXPOSE 9000
