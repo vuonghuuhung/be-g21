@@ -30,4 +30,5 @@ RUN composer install --optimize-autoloader
 # RUN php artisan key:generate
 
 # Chạy ứng dụng Laravel
-CMD ["php", "artisan", "serve", "--port=80"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
+EXPOSE 80
