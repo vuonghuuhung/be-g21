@@ -20,8 +20,15 @@ WORKDIR /var/www/html
 # Copy mã nguồn Laravel vào container
 COPY . .
 
-# # Copy file .env vào container
-# COPY .env /var/www/html/.env
+# Copy file .env.example vào .env
+COPY .env.example /var/www/html/.env
+
+# Cập nhật biến môi trường trong file .env
+RUN sed -i 's/DB_HOST=127.0.0.1/DB_HOST=${DB_HOST}/g' /var/www/html/.env \
+    && sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${DB_DATABASE}/g' /var/www/html/.env \
+    && sed -i 's/DB_USERNAME=root/DB_USERNAME=${DB_USERNAME}/g' /var/www/html/.env \
+    && sed -i 's/DB_PASSWORD=/DB_PASSWORD=${DB_PASSWORD}/g' /var/www/html/.env \
+    && sed -i 's/APP_KEY=/APP_KEY=${APP_KEY}/g' /var/www/html/.env
 
 # Cài đặt các gói Composer
 RUN composer install --optimize-autoloader --no-dev
