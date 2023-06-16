@@ -1,6 +1,12 @@
 # Sử dụng PHP 8.1 trên base image
 FROM php:8.1-fpm
 
+ARG DB_HOST
+ARG DB_DATABASE
+ARG DB_USERNAME
+ARG DB_PASSWORD
+ARG APP_KEY
+
 # Cài đặt các gói phụ thuộc
 RUN apt-get update && apt-get install -y \
     curl \

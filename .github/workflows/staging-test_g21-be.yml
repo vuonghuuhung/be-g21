@@ -32,12 +32,12 @@ jobs:
           push: true
           tags: g21be.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_aa61053aeea04480a2622e2dd49bf5d9 }}/g21-be:${{ github.sha }}
           file: ./Dockerfile
-        env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          APP_KEY: ${{ secrets.APP_KEY }}
+          build-args:
+            DB_HOST: ${{ secrets.DB_HOST }}
+            DB_DATABASE: ${{ secrets.DB_DATABASE }}
+            DB_USERNAME: ${{ secrets.DB_USERNAME }}
+            DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+            APP_KEY: ${{ secrets.APP_KEY }}
 
   deploy:
     runs-on: ubuntu-latest
