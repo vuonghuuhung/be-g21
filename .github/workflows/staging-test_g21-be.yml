@@ -27,16 +27,16 @@ jobs:
           password: ${{ secrets.AzureAppService_ContainerPassword_55de2f91d3c2492496fc07954202b03d }}
 
       - name: Build and push container image to registry
-          uses: docker/build-push-action@v3
-          with:
-            push: true
-            tags: g21be.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_aa61053aeea04480a2622e2dd49bf5d9 }}/g21-be:${{ github.sha }}
-            file: ./Dockerfile
-            build-args: |
-              DB_HOST=${{ secrets.DB_HOST }}
-              DB_DATABASE=${{ secrets.DB_DATABASE }}
-              DB_USERNAME=${{ secrets.DB_USERNAME }}
-              DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: g21be.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_aa61053aeea04480a2622e2dd49bf5d9 }}/g21-be:${{ github.sha }}
+          file: ./Dockerfile
+          build-args: |
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_DATABASE=${{ secrets.DB_DATABASE }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
 
   deploy:
     runs-on: ubuntu-latest
