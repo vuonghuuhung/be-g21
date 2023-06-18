@@ -32,4 +32,14 @@ class User extends Authenticatable
         'password',
         'token',
     ];
+
+    public function city()
+    {
+        return $this->belongsTo('App\Models\City');
+    }
+
+    public function address()
+    {
+        return $this->belongsTo('App\Models\Urban');
+    }
 }

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(RegisterController::class)->group(function () {
     Route::post('register', 'register');
-    Route::post('login', 'login');
+    Route::post('login', 'login')->name('login');
 });
 
 Route::controller(AddressController::class)->group(function () {
