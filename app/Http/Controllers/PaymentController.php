@@ -25,7 +25,7 @@ class PaymentController extends Controller
         $vnp_TmnCode = "B7LZVN7C"; //Mã website tại VNPAY 
         $vnp_HashSecret = "JEMLIIULPBERSVSHTGXKJPLYLVSCRMFS"; //Chuỗi bí mật
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:8000/api/payment/handle_result";
+        $vnp_Returnurl = "https://g21-be.azurewebsites.net/api/payment/handle_result";
         $vnp_TxnRef = $order_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
         $vnp_OrderType = '250000';
