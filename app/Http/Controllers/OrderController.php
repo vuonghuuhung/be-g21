@@ -7,6 +7,7 @@ use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductStyle;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -67,5 +68,17 @@ class OrderController extends BaseController
         } else {
             return $this->sendResponse('Error', 'Order update failed.');
         }
+    }
+
+    public function analysis()
+    {
+
+        $order = Order::get()->count();
+        $sum = Order::sum('total_price');
+        $product = Product::get()->count();
+        $style = ProductStyle::get()->count() + ProductColor::get()->count();
+        $user = User::get()->count();
+        $admin = User::where('status', 2)->get()->count();
+        return $this->sendResponse(['order' => $order, 'sum' => $sum, 'product' => $product, 'style' => $style, 'user' => $user, 'admin' => $admin], 'Analysis retrieved successfully.');
     }
 }
