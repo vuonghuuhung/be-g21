@@ -40,7 +40,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/color/{id}', 'getColorById');
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum', 'can:isAdmin')->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/admin/products', 'index');
         Route::post('/admin/product/update/{id}', 'updateProduct');
