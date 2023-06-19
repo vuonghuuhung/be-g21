@@ -15,7 +15,7 @@ class UserController extends BaseController
         $page = $request->input('page') ?? 1;
         $perPage = $request->input('perPage') ?? 10;
         $search = $request->input('search') ?? '';
-        $users = User::where('status', '!=', 3)->where('firstname', 'LIKE', "%$search%")->orWhere('lastname', 'LIKE', "%$search%")->with('city')->get();
+        $users = User::where('lastname', 'LIKE', "%$search%")->where('status', '!=', 3)->with('city')->get();
         $users = new LengthAwarePaginator($users->forPage($page, $perPage), $users->count(), $perPage, $page);
         return $this->sendResponse($users, 'Users retrieved successfully.');
     }

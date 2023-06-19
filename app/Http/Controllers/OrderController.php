@@ -38,22 +38,34 @@ class OrderController extends BaseController
     {
         $page = $request->input('page') ?? 1;
         $perPage = $request->input('perPage') ?? 10;
-        $orders = Order::get();
+        $orders = Order::where('status', '!=', 5)->get();
         $orders = new LengthAwarePaginator($orders->forPage($page, $perPage), $orders->count(), $perPage, $page);
         return $this->sendResponse($orders, 'Orders retrieved successfully.');
     }
 
     public function getOrderById($id)
     {
-        $order = Order::where('id', $id)->get()->first();
+        $order = Order::where('status', '!=', 5)->where('id', $id)->with('user')->get()->first();
         $products = OrderDetail::where('order_id', $id)->get();
         if (isset($products)) {
             foreach ($products as $product) {
                 $p = Product::where('id', $product->product_id)->get()->first();
                 $product->type = $p->option_type == 1 ? ProductColor::where("id", $product->product_detail_id)->get()->first() : ProductStyle::where("id", $product->product_detail_id)->get()->first();
+                $product->info = $p;
             }
         }
         $order->detail = $products;
         return $this->sendResponse($order, 'Order retrieved successfully.');
+    }
+
+    public function updateOrder($id, Request $request)
+    {
+        $data = $request->all();
+        $order = Order::where('id', $id)->update($data);
+        if ($order) {
+            return $this->sendResponse('OK', 'Order update successful.');
+        } else {
+            return $this->sendResponse('Error', 'Order update failed.');
+        }
     }
 }

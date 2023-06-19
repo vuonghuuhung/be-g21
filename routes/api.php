@@ -56,6 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/admin/order_detail/create', 'createOrderDetail');
         Route::get('/admin/order/{id}', 'getOrderById');
         Route::get('/admin/orders', 'getListOrder');
+        Route::post('/admin/order/update/{id}', 'updateOrder');
     });
 
     Route::controller(UserController::class)->group(function () {
