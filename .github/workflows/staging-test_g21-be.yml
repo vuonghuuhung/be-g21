@@ -37,6 +37,8 @@ jobs:
             DB_DATABASE=${{ secrets.DB_DATABASE }}
             DB_USERNAME=${{ secrets.DB_USERNAME }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            VNP_TMNCODE=${{ secrets.VNP_TMNCODE }}
+            VNP_HASHSECRET=${{ secrets.VNP_HASHSECRET }}
 
   deploy:
     runs-on: ubuntu-latest

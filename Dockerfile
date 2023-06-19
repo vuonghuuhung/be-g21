@@ -5,6 +5,8 @@ ARG DB_HOST
 ARG DB_DATABASE
 ARG DB_USERNAME
 ARG DB_PASSWORD
+ARG VNP_TMNCODE
+ARG VNP_HASHSECRET
 
 # Cài đặt các gói phụ thuộc
 RUN apt-get update && apt-get install -y \
@@ -31,7 +33,9 @@ COPY .env.example /var/www/html/.env
 RUN sed -i 's/DB_HOST=127.0.0.1/DB_HOST='"${DB_HOST}"'/g' /var/www/html/.env \
     && sed -i 's/DB_DATABASE=laravel/DB_DATABASE='"${DB_DATABASE}"'/g' /var/www/html/.env \
     && sed -i 's/DB_USERNAME=root/DB_USERNAME='"${DB_USERNAME}"'/g' /var/www/html/.env \
-    && sed -i 's/DB_PASSWORD=/DB_PASSWORD='"${DB_PASSWORD}"'/g' /var/www/html/.env
+    && sed -i 's/DB_PASSWORD=/DB_PASSWORD='"${DB_PASSWORD}"'/g' /var/www/html/.env \
+    && sed -i 's/VNP_TMNCODE=/VNP_TMNCODE='"${VNP_TMNCODE}"'/g' /var/www/html/.env \
+    && sed -i 's/VNP_HASHSECRET=/VNP_HASHSECRET='"${VNP_HASHSECRET}"'/g' /var/www/html/.env 
 
 # Cài đặt các gói Composer
 RUN composer install --optimize-autoloader --no-dev
