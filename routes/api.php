@@ -57,6 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/admin/order/{id}', 'getOrderById');
         Route::get('/admin/orders', 'getListOrder');
         Route::post('/admin/order/update/{id}', 'updateOrder');
+        Route::get('/admin/analysis', 'analysis');
     });
 
     Route::controller(UserController::class)->group(function () {
