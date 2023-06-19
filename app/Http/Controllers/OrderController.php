@@ -39,7 +39,8 @@ class OrderController extends BaseController
     {
         $page = $request->input('page') ?? 1;
         $perPage = $request->input('perPage') ?? 10;
-        $orders = Order::where('status', '!=', 5)->get();
+        $search = $request->input('search') ?? '';
+        $orders = Order::where('status', '!=', 5)->where('id', 'LIKE', "%$search%")->get();
         $orders = new LengthAwarePaginator($orders->forPage($page, $perPage), $orders->count(), $perPage, $page);
         return $this->sendResponse($orders, 'Orders retrieved successfully.');
     }
