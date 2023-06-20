@@ -88,7 +88,6 @@ class PaymentController extends Controller
         if ($request->vnp_ResponseCode == "00") {
             return redirect($url)->with('success', 'Đã thanh toán phí dịch vụ');
         }
-        session()->forget('url_prev');
         return redirect($url)->with('errors', 'Lỗi trong quá trình thanh toán phí dịch vụ');
     }
 
