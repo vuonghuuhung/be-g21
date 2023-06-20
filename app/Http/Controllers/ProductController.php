@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductStyle;
@@ -35,6 +36,15 @@ class ProductController extends BaseController
         $perPage = $request->input('perPage') ?? 10;
         $search = $request->input('search') ?? '';
         $products = Product::where('product_name', 'LIKE', "%$search%")->where('status', '=', 1)->with('category')->with('colors')->with('styles')->get();
+        if (isset($products)) {
+            foreach ($products as $product) {
+                $count = OrderDetail::where('product_id', $product->id)->count();
+                if ($count != 0)
+                    $rate = OrderDetail::where('product_id', $product->id)->sum('rate') / $count;
+                else $rate = 0;
+                $product->rate = $rate;
+            }
+        }
         $products = new LengthAwarePaginator($products->forPage($page, $perPage), $products->count(), $perPage, $page);
         return $this->sendResponse($products, 'Products retrieved successfully.');
     }
@@ -66,7 +76,7 @@ class ProductController extends BaseController
         if ($product) {
             return $this->sendResponse('OK', 'Product update successful.');
         } else {
-            return $this->sendResponse('Error', 'Product update failed.');
+            return $this->sendError('Error', 'Product update failed.');
         }
     }
 
@@ -77,7 +87,7 @@ class ProductController extends BaseController
         if ($category) {
             return $this->sendResponse('OK', 'Category create successful.');
         } else {
-            return $this->sendResponse('Error', 'Category create failed.');
+            return $this->sendError('Error', 'Category create failed.');
         }
     }
 
@@ -88,7 +98,7 @@ class ProductController extends BaseController
         if ($product) {
             return $this->sendResponse($product->id, 'Category create successful.');
         } else {
-            return $this->sendResponse($product->id, 'Category create failed.');
+            return $this->sendError($product->id, 'Category create failed.');
         }
     }
 
@@ -111,7 +121,7 @@ class ProductController extends BaseController
         if ($product) {
             return $this->sendResponse('OK', 'Product style update successful.');
         } else {
-            return $this->sendResponse('Error', 'Product style update failed.');
+            return $this->sendError('Error', 'Product style update failed.');
         }
     }
 
@@ -122,7 +132,7 @@ class ProductController extends BaseController
         if ($product) {
             return $this->sendResponse('OK', 'Product color update successful.');
         } else {
-            return $this->sendResponse('Error', 'Product color update failed.');
+            return $this->sendError('Error', 'Product color update failed.');
         }
     }
 
@@ -133,7 +143,7 @@ class ProductController extends BaseController
         if ($style) {
             return $this->sendResponse('OK', 'Style create successful.');
         } else {
-            return $this->sendResponse('Error', 'Style create failed.');
+            return $this->sendError('Error', 'Style create failed.');
         }
     }
 
@@ -144,7 +154,7 @@ class ProductController extends BaseController
         if ($style) {
             return $this->sendResponse('OK', 'Color create successful.');
         } else {
-            return $this->sendResponse('Error', 'Color create failed.');
+            return $this->sendError('Error', 'Color create failed.');
         }
     }
 }
