@@ -101,4 +101,16 @@ class OrderController extends BaseController
             return $this->sendResponse($order, 'Order retrieved successfully.');
         }
     }
+
+    public function rateProduct($id, Request $request)
+    {
+
+        $data = $request->all();
+        $p = OrderDetail::where('id', $id)->update($data);
+        if ($p) {
+            return $this->sendResponse('OK', 'Product rate update successful.');
+        } else {
+            return $this->sendError('Error', 'Product rate update failed.');
+        }
+    }
 }

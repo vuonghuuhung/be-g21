@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\ProductColor;
 use App\Models\ProductStyle;
@@ -35,6 +36,15 @@ class ProductController extends BaseController
         $perPage = $request->input('perPage') ?? 10;
         $search = $request->input('search') ?? '';
         $products = Product::where('product_name', 'LIKE', "%$search%")->where('status', '=', 1)->with('category')->with('colors')->with('styles')->get();
+        if (isset($products)) {
+            foreach ($products as $product) {
+                $count = OrderDetail::where('product_id', $product->id)->count();
+                if ($count != 0)
+                    $rate = OrderDetail::where('product_id', $product->id)->sum('rate') / $count;
+                else $rate = 0;
+                $product->rate = $rate;
+            }
+        }
         $products = new LengthAwarePaginator($products->forPage($page, $perPage), $products->count(), $perPage, $page);
         return $this->sendResponse($products, 'Products retrieved successfully.');
     }
