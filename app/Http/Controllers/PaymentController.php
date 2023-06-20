@@ -84,7 +84,7 @@ class PaymentController extends Controller
             'amount' => $request->input('vnp_Amount')
         ];
         $payment = Payment::create($data_payment);
-        $url = 'https://g21team.azurewebsites.net/payment-success/' . $payment->id;
+        $url = 'https://g21team.azurewebsites.net/payment-success?payment_id=' . $payment->id;
         if ($request->vnp_ResponseCode == "00") {
             return redirect($url)->with('success', 'Đã thanh toán phí dịch vụ');
         }
