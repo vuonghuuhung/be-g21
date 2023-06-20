@@ -27,7 +27,7 @@ class UserController extends BaseController
         if ($user) {
             return $this->sendResponse('OK', 'User update successful.');
         } else {
-            return $this->sendResponse('Error', 'User update failed.');
+            return $this->sendError('Error', 'User update failed.');
         }
     }
 

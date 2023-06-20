@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::controller(PaymentController::class)->group(function () {
     Route::post('/payment/create', 'create');
     Route::get('/payment/handle_result', 'handlePaymentResult');
@@ -75,5 +76,12 @@ Route::middleware('auth:sanctum', 'can:isAdmin')->group(function () {
         Route::get('/admin/user/{id}', 'getUserById');
         Route::get('/admin/users', 'getListUser');
         Route::post('/admin/user/update/{id}', 'updateUser');
+    });
+});
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/user/order-list/{id}', 'getOrderByUserId');
     });
 });
