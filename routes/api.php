@@ -83,5 +83,6 @@ Route::middleware('auth:sanctum', 'can:isAdmin')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(OrderController::class)->group(function () {
         Route::get('/user/order-list/{id}', 'getOrderByUserId');
+        Route::post('/user/product-rate/{id}', 'rateProduct');
     });
 });
