@@ -66,7 +66,7 @@ class ProductController extends BaseController
         if ($product) {
             return $this->sendResponse('OK', 'Product update successful.');
         } else {
-            return $this->sendResponse('Error', 'Product update failed.');
+            return $this->sendError('Error', 'Product update failed.');
         }
     }
 
@@ -77,7 +77,7 @@ class ProductController extends BaseController
         if ($category) {
             return $this->sendResponse('OK', 'Category create successful.');
         } else {
-            return $this->sendResponse('Error', 'Category create failed.');
+            return $this->sendError('Error', 'Category create failed.');
         }
     }
 
@@ -88,7 +88,7 @@ class ProductController extends BaseController
         if ($product) {
             return $this->sendResponse($product->id, 'Category create successful.');
         } else {
-            return $this->sendResponse($product->id, 'Category create failed.');
+            return $this->sendError($product->id, 'Category create failed.');
         }
     }
 
@@ -111,7 +111,7 @@ class ProductController extends BaseController
         if ($product) {
             return $this->sendResponse('OK', 'Product style update successful.');
         } else {
-            return $this->sendResponse('Error', 'Product style update failed.');
+            return $this->sendError('Error', 'Product style update failed.');
         }
     }
 
@@ -122,7 +122,7 @@ class ProductController extends BaseController
         if ($product) {
             return $this->sendResponse('OK', 'Product color update successful.');
         } else {
-            return $this->sendResponse('Error', 'Product color update failed.');
+            return $this->sendError('Error', 'Product color update failed.');
         }
     }
 
@@ -133,7 +133,7 @@ class ProductController extends BaseController
         if ($style) {
             return $this->sendResponse('OK', 'Style create successful.');
         } else {
-            return $this->sendResponse('Error', 'Style create failed.');
+            return $this->sendError('Error', 'Style create failed.');
         }
     }
 
@@ -144,7 +144,7 @@ class ProductController extends BaseController
         if ($style) {
             return $this->sendResponse('OK', 'Color create successful.');
         } else {
-            return $this->sendResponse('Error', 'Color create failed.');
+            return $this->sendError('Error', 'Color create failed.');
         }
     }
 }
