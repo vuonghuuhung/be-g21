@@ -41,8 +41,12 @@ class ProductController extends BaseController
                 $count = OrderDetail::where('product_id', $product->id)->count();
                 if ($count != 0)
                     $rate = OrderDetail::where('product_id', $product->id)->sum('rate') / $count;
-                else $rate = 0;
+                else {
+                    $rate = 0;
+                    $count = 0;
+                }
                 $product->rate = $rate;
+                $product->countRate = $count;
             }
         }
         $products = new LengthAwarePaginator($products->forPage($page, $perPage), $products->count(), $perPage, $page);
@@ -53,6 +57,11 @@ class ProductController extends BaseController
     {
         $product = Product::where('id', $id)->get()->first();
         $product->type = $product->option_type == 1 ? ProductColor::where("product_id", $id)->where('status', '=', 1)->get() : ProductStyle::where("product_id", $id)->where('status', '=', 1)->get();
+        $count = OrderDetail::where('product_id', $product->id)->count();
+        if ($count != 0)
+            $rate = OrderDetail::where('product_id', $product->id)->sum('rate') / $count;
+        else $rate = 0;
+        $product->rate = $rate;
         return $this->sendResponse($product, 'Product retrieved successfully.');
     }
 
