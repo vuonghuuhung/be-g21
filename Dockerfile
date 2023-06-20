@@ -46,5 +46,3 @@ RUN php artisan key:generate
 # Chạy ứng dụng Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
 EXPOSE 9000 80
-
-# --build-arg DB_HOST=g21.mysql.database.azure.com --build-arg DB_DATABASE=g21 --build-arg DB_USERNAME=g21 --build-arg DB_PASSWORD=Vuonghung@1802
