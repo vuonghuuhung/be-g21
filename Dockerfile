@@ -39,9 +39,9 @@ RUN sed -i 's/DB_HOST=127.0.0.1/DB_HOST='"${DB_HOST}"'/g' /var/www/html/.env \
     && sed -i 's/DB_PASSWORD=/DB_PASSWORD='"${DB_PASSWORD}"'/g' /var/www/html/.env \
     && sed -i 's/VNP_TMNCODE=/VNP_TMNCODE='"${VNP_TMNCODE}"'/g' /var/www/html/.env \
     && sed -i 's/VNP_HASHSECRET=/VNP_HASHSECRET='"${VNP_HASHSECRET}"'/g' /var/www/html/.env \
-    && sed -i 's/VNP_URL=/VNP_URL='"${VNP_URL}"'/g' /var/www/html/.env \
-    && sed -i 's/VNP_RETURN_URL=/VNP_RETURN_URL='"${VNP_RETURN_URL}"'/g' /var/www/html/.env \
-    && sed -i 's/FE_PAYMENT_RESULT_URL=/FE_PAYMENT_RESULT_URL='"${FE_PAYMENT_RESULT_URL}"'/g' /var/www/html/.env 
+    && sed -i 's%VNP_URL=%VNP_URL='"${VNP_URL}"'%g' /var/www/html/.env \
+    && sed -i 's%VNP_RETURN_URL=%VNP_RETURN_URL='"${VNP_RETURN_URL}"'%g' /var/www/html/.env \
+    && sed -i 's%FE_PAYMENT_RESULT_URL=%FE_PAYMENT_RESULT_URL='"${FE_PAYMENT_RESULT_URL}"'%g' /var/www/html/.env 
 
 # Cài đặt các gói Composer
 RUN composer install --optimize-autoloader --no-dev
