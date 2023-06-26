@@ -7,6 +7,9 @@ ARG DB_USERNAME
 ARG DB_PASSWORD
 ARG VNP_TMNCODE
 ARG VNP_HASHSECRET
+ARG VNP_URL
+ARG VNP_RETURN_URL
+ARG FE_PAYMENT_RESULT_URL
 
 # Cài đặt các gói phụ thuộc
 RUN apt-get update && apt-get install -y \
@@ -35,7 +38,10 @@ RUN sed -i 's/DB_HOST=127.0.0.1/DB_HOST='"${DB_HOST}"'/g' /var/www/html/.env \
     && sed -i 's/DB_USERNAME=root/DB_USERNAME='"${DB_USERNAME}"'/g' /var/www/html/.env \
     && sed -i 's/DB_PASSWORD=/DB_PASSWORD='"${DB_PASSWORD}"'/g' /var/www/html/.env \
     && sed -i 's/VNP_TMNCODE=/VNP_TMNCODE='"${VNP_TMNCODE}"'/g' /var/www/html/.env \
-    && sed -i 's/VNP_HASHSECRET=/VNP_HASHSECRET='"${VNP_HASHSECRET}"'/g' /var/www/html/.env 
+    && sed -i 's/VNP_HASHSECRET=/VNP_HASHSECRET='"${VNP_HASHSECRET}"'/g' /var/www/html/.env \
+    && sed -i 's/VNP_URL=/VNP_URL='"${VNP_URL}"'/g' /var/www/html/.env \
+    && sed -i 's/VNP_RETURN_URL=/VNP_RETURN_URL='"${VNP_RETURN_URL}"'/g' /var/www/html/.env \
+    && sed -i 's/FE_PAYMENT_RESULT_URL=/FE_PAYMENT_RESULT_URL='"${FE_PAYMENT_RESULT_URL}"'/g' /var/www/html/.env 
 
 # Cài đặt các gói Composer
 RUN composer install --optimize-autoloader --no-dev
@@ -46,5 +52,3 @@ RUN php artisan key:generate
 # Chạy ứng dụng Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
 EXPOSE 9000 80
-
-# --build-arg DB_HOST=g21.mysql.database.azure.com --build-arg DB_DATABASE=g21 --build-arg DB_USERNAME=g21 --build-arg DB_PASSWORD=Vuonghung@1802
