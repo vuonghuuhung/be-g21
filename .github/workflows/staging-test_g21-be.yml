@@ -39,8 +39,8 @@ jobs:
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             VNP_TMNCODE=${{ secrets.VNP_TMNCODE }}
             VNP_HASHSECRET=${{ secrets.VNP_HASHSECRET }}
-            VNP_RETURN_URL=${{ secrets.VNP_RETURN_URL }}
             VNP_URL=${{ secrets.VNP_URL }}
+            VNP_RETURN_URL=${{ secrets.VNP_RETURN_URL }}
             FE_PAYMENT_RESULT_URL=${{ secrets.FE_PAYMENT_RESULT_URL }}
 
   deploy:
