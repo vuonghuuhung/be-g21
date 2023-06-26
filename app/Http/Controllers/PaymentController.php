@@ -22,10 +22,10 @@ class PaymentController extends Controller
         foreach ($order_detail_data as &$detail) {
             OrderDetail::create($detail);
         }
-        $vnp_TmnCode = env('VNP_TMNCODE'); //Mã website tại VNPAY 
-        $vnp_HashSecret = env('VNP_HASHSECRET'); //Chuỗi bí mật
-        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "https://g21-be.azurewebsites.net/api/payment/handle_result";
+        $vnp_TmnCode = env('VNP_TMNCODE '); //Mã website tại VNPAY 
+        $vnp_HashSecret = env('VNP_HASHSECRET '); //Chuỗi bí mật
+        $vnp_Url = env('VNP_URL');
+        $vnp_Returnurl = env('VNP_RETURN_URL');
         $vnp_TxnRef = $order_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
         $vnp_OrderType = '250000';
@@ -84,7 +84,7 @@ class PaymentController extends Controller
             'amount' => $request->input('vnp_Amount')
         ];
         $payment = Payment::create($data_payment);
-        $url = 'https://g21team.azurewebsites.net/payment-success/' . $payment->id;
+        $url = env('FE_PAYMENT_RESULT_URL') . $payment->id;
         if ($request->vnp_ResponseCode == "00") {
             return redirect($url)->with('success', 'Đã thanh toán phí dịch vụ');
         }
