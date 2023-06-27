@@ -85,23 +85,23 @@ class OrderController extends BaseController
 
     public function getOrderByUserId($id, Request $request)
     {
-        if ($request->user()->id != $id) {
-            return $this->sendError('Order retrieved failed.');
-        } else {
-            $orders = Order::where('status', '!=', 5)->where('user_id', $id)->with('user')->get();
-            foreach ($orders as $order) {
-                $products = OrderDetail::where('order_id', $order->id)->get();
-                if (isset($products)) {
-                    foreach ($products as $product) {
-                        $p = Product::where('id', $product->product_id)->get()->first();
-                        $product->type = $p->option_type == 1 ? ProductColor::where("id", $product->product_detail_id)->get()->first() : ProductStyle::where("id", $product->product_detail_id)->get()->first();
-                        $product->info = $p;
-                    }
+        // if ($request->user()->id != $id) {
+        //     return $this->sendError('Order retrieved failed.');
+        // } else {
+        $orders = Order::where('status', '!=', 5)->where('user_id', $id)->with('user')->get();
+        foreach ($orders as $order) {
+            $products = OrderDetail::where('order_id', $order->id)->get();
+            if (isset($products)) {
+                foreach ($products as $product) {
+                    $p = Product::where('id', $product->product_id)->get()->first();
+                    $product->type = $p->option_type == 1 ? ProductColor::where("id", $product->product_detail_id)->get()->first() : ProductStyle::where("id", $product->product_detail_id)->get()->first();
+                    $product->info = $p;
                 }
-                $order->detail = $products;
             }
-            return $this->sendResponse($orders, 'Order retrieved successfully.');
+            $order->detail = $products;
         }
+        return $this->sendResponse($orders, 'Order retrieved successfully.');
+        // }
     }
 
     public function rateProduct($id, Request $request)
