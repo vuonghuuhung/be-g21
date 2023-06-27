@@ -90,7 +90,7 @@ class OrderController extends BaseController
         } else {
             $orders = Order::where('status', '!=', 5)->where('user_id', $id)->with('user')->get();
             foreach ($orders as $order) {
-                $products = OrderDetail::where('order_id', $id)->get();
+                $products = OrderDetail::where('order_id', $order->id)->get();
                 if (isset($products)) {
                     foreach ($products as $product) {
                         $p = Product::where('id', $product->product_id)->get()->first();
