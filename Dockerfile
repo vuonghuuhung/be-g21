@@ -48,6 +48,8 @@ RUN composer install --optimize-autoloader --no-dev
 
 # Tạo key mới cho ứng dụng Laravel
 RUN php artisan key:generate 
+RUN php artisan config:cache
+RUN php artisan config:clear 
 
 # Chạy ứng dụng Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]

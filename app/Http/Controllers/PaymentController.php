@@ -22,8 +22,8 @@ class PaymentController extends Controller
         foreach ($order_detail_data as &$detail) {
             OrderDetail::create($detail);
         }
-        $vnp_TmnCode = env('VNP_TMNCODE '); //Mã website tại VNPAY 
-        $vnp_HashSecret = env('VNP_HASHSECRET '); //Chuỗi bí mật
+        $vnp_TmnCode = env('VNP_TMNCODE'); //Mã website tại VNPAY 
+        $vnp_HashSecret = env('VNP_HASHSECRET'); //Chuỗi bí mật
         $vnp_Url = env('VNP_URL');
         $vnp_Returnurl = env('VNP_RETURN_URL');
         $vnp_TxnRef = $order_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
