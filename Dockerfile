@@ -51,6 +51,7 @@ RUN sed -i 's/DB_HOST=127.0.0.1/DB_HOST='"${DB_HOST}"'/g' /var/www/html/.env \
 
 
 # Cài đặt các gói Composer
+RUN composer update --lock
 RUN composer install --optimize-autoloader --no-dev
 
 # Tạo key mới cho ứng dụng Laravel
