@@ -67,7 +67,7 @@ class ProductController extends BaseController
 
     public function getAllCategory()
     {
-        $category = Category::all();
+        $category = Category::where('status', '=', 1)->get();
         return $this->sendResponse($category, 'Categorys retrieved successfully.');
     }
 
@@ -164,6 +164,27 @@ class ProductController extends BaseController
             return $this->sendResponse('OK', 'Color create successful.');
         } else {
             return $this->sendError('Error', 'Color create failed.');
+        }
+    }
+
+    public function getCategores(Request $request)
+    {
+        $page = $request->input('page') ?? 1;
+        $perPage = $request->input('perPage') ?? 10;
+        $search = $request->input('search') ?? '';
+        $category = Category::where('category_name', 'LIKE', "%$search%")->where('status', '=', 1)->all();
+        $category = new LengthAwarePaginator($category->forPage($page, $perPage), $category->count(), $perPage, $page);
+        return $this->sendResponse($category, 'Categories retrieved successfully.');
+    }
+
+    public function updateCategory($id, Request $request)
+    {
+        $data = $request->all();
+        $category = Product::where('id', $id)->update($data);
+        if ($category) {
+            return $this->sendResponse('OK', 'Category update successful.');
+        } else {
+            return $this->sendError('Error', 'Category update failed.');
         }
     }
 }
