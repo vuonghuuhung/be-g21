@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
@@ -85,4 +86,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/user/order-list/{id}', 'getOrderByUserId');
         Route::post('/user/product-rate/{id}', 'rateProduct');
     });
+    Route::controller(ChatsController::class)->group(function () {
+        Route::get('messages', 'fetchMessages');
+        Route::post('messages', 'sendMessage');
+        Route::post('pusherauth', 'pusherAuth');
+        Route::post('pusherauthchannel', 'pusherAuthChanel');
+    });
 });
+
