@@ -56,7 +56,7 @@ Route::controller(ProductController::class)->group(function () {
 Route::middleware('auth:sanctum', 'can:isAdmin')->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/admin/products', 'index');
-        Route::get('/admin/categories', 'getCategores');
+        Route::get('/admin/categories', 'getCategories');
         Route::post('/admin/product/update/{id}', 'updateProduct');
         Route::post('/admin/category/update/{id}', 'updateCategory');
         Route::post('/admin/category/create', 'createCategory');

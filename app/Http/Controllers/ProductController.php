@@ -167,12 +167,12 @@ class ProductController extends BaseController
         }
     }
 
-    public function getCategores(Request $request)
+    public function getCategories(Request $request)
     {
         $page = $request->input('page') ?? 1;
         $perPage = $request->input('perPage') ?? 10;
         $search = $request->input('search') ?? '';
-        $category = Category::where('category_name', 'LIKE', "%$search%")->where('status', '=', 1)->all();
+        $category = Category::where('category_name', 'LIKE', "%$search%")->where('status', '=', 1)->get();
         $category = new LengthAwarePaginator($category->forPage($page, $perPage), $category->count(), $perPage, $page);
         return $this->sendResponse($category, 'Categories retrieved successfully.');
     }
