@@ -10,6 +10,9 @@ ARG VNP_HASHSECRET
 ARG VNP_URL
 ARG VNP_RETURN_URL
 ARG FE_PAYMENT_RESULT_URL
+ARG PUSHER_APP_ID
+ARG PUSHER_APP_KEY
+ARG PUSHER_APP_SECRET
 
 # Cài đặt các gói phụ thuộc
 RUN apt-get update && apt-get install -y \
@@ -41,7 +44,11 @@ RUN sed -i 's/DB_HOST=127.0.0.1/DB_HOST='"${DB_HOST}"'/g' /var/www/html/.env \
     && sed -i 's/VNP_HASHSECRET=/VNP_HASHSECRET='"${VNP_HASHSECRET}"'/g' /var/www/html/.env \
     && sed -i 's%VNP_URL=%VNP_URL='"${VNP_URL}"'%g' /var/www/html/.env \
     && sed -i 's%VNP_RETURN_URL=%VNP_RETURN_URL='"${VNP_RETURN_URL}"'%g' /var/www/html/.env \
-    && sed -i 's%FE_PAYMENT_RESULT_URL=%FE_PAYMENT_RESULT_URL='"${FE_PAYMENT_RESULT_URL}"'%g' /var/www/html/.env 
+    && sed -i 's%FE_PAYMENT_RESULT_URL=%FE_PAYMENT_RESULT_URL='"${FE_PAYMENT_RESULT_URL}"'%g' /var/www/html/.env \
+    && sed -i 's%PUSHER_APP_ID=%PUSHER_APP_ID='"${PUSHER_APP_ID}"'%g' /var/www/html/.env \
+    && sed -i 's%PUSHER_APP_KEY=%PUSHER_APP_KEY='"${PUSHER_APP_KEY}"'%g' /var/www/html/.env \
+    && sed -i 's%PUSHER_APP_SECRET=%PUSHER_APP_SECRET='"${PUSHER_APP_SECRET}"'%g' /var/www/html/.env 
+
 
 # Cài đặt các gói Composer
 RUN composer install --optimize-autoloader --no-dev
