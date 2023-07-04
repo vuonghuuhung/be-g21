@@ -48,7 +48,7 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['presence-chat'];
+        return ['private-chat-' . $this->user->id];
     }
 
     public function broadcastAs() 

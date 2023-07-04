@@ -74,11 +74,13 @@ Route::middleware('auth:sanctum', 'can:isAdmin')->group(function () {
         Route::post('/admin/order/update/{id}', 'updateOrder');
         Route::get('/admin/analysis', 'analysis');
     });
-
     Route::controller(UserController::class)->group(function () {
         Route::get('/admin/user/{id}', 'getUserById');
         Route::get('/admin/users', 'getListUser');
         Route::post('/admin/user/update/{id}', 'updateUser');
+    });
+    Route::controller(ChatsController::class)->group(function () {
+        Route::post('/admin/messages', 'adminSentMessage');
     });
 });
 
