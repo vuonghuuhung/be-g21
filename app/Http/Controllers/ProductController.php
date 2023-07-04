@@ -180,7 +180,7 @@ class ProductController extends BaseController
     public function updateCategory($id, Request $request)
     {
         $data = $request->all();
-        $category = Product::where('id', $id)->update($data);
+        $category = Category::where('id', $id)->update($data);
         if ($category) {
             return $this->sendResponse('OK', 'Category update successful.');
         } else {
